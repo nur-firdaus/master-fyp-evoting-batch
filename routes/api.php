@@ -4,6 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\CandidateController;
+use App\Http\Controllers\VoterController;
+use App\Http\Controllers\ElectionController;
+use App\Http\Controllers\AdminController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/save-vote/{voter_id}/{candidate_id}/{election_id}', [VoteController::class, 'saveVote']);
-
-
 Route::post('/candidates', [CandidateController::class, 'store']);
+Route::post('/voters', [VoterController::class, 'store']);
+Route::post('/elections', [ElectionController::class, 'store']);
+Route::post('/admins', [AdminController::class, 'store']);
