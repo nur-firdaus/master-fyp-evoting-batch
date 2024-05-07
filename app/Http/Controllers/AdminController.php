@@ -31,4 +31,30 @@ class AdminController extends Controller
         // Return a JSON response indicating success
         return response()->json(['message' => 'Admin created successfully'], 201);
     }
+
+    public function login(Request $request)
+    {
+        // Validate the request data
+        $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        // Find the admin with the provided username
+        $admin = Admin::where('username', $request->input('username'))->first();
+
+        // Check if admin exists and the password matches
+        if ($admin && ($request->input('password')== $admin->password)) {
+            // If authentication is successful, return the admin's details
+            return response()->json([
+                'id' => $admin->admin_id,
+                'username' => $admin->username,
+                'email' => $admin->email,
+                // Add other admin details as needed
+            ], 200);
+        }
+
+        // If authentication fails, return an error response
+        return response()->json(['message' => 'Invalid credentials'], 401);
+    }
 }

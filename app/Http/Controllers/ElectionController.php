@@ -31,5 +31,14 @@ class ElectionController extends Controller
         // Return a JSON response indicating success
         return response()->json(['message' => 'Election created successfully'], 201);
     }
+
+    public function index()
+    {
+        // Retrieve all elections from the database
+        $elections = Election::all();
+
+        // Return a JSON response with the retrieved elections
+        return response()->json($elections);
+    }
 }
 
