@@ -31,6 +31,7 @@ Route::post('/candidates', [CandidateController::class, 'store']);
 Route::post('/voters', [VoterController::class, 'store']);
 Route::post('/elections', [ElectionController::class, 'store']);
 Route::post('/admins', [AdminController::class, 'store']);
+Route::post('/votes', [VoteController::class, 'saveVotes']);
 
 //get listing
 Route::get('/elections', [ElectionController::class, 'index']);
@@ -43,3 +44,7 @@ Route::post('/voter/login', [VoterController::class, 'login']);
 
 //get list of voters
 Route::get('/elections/{election_id}/voters', [VoteController::class, 'findVotersBasedOnElectionId']);
+Route::get('/elections/{election_id}/voters/{voter_id}', [VoteController::class, 'checkDoneVote']);
+
+
+Route::post('/vote-counts', [VoteController::class, 'getVoteCounts']);
