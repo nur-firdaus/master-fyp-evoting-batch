@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Election;
+use App\Models\CandidateElection;
 
 class ElectionController extends Controller
 {

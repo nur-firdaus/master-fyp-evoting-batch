@@ -37,9 +37,7 @@ class CandidateController extends Controller
     {
         try {
             // Retrieve voters based on the election ID
-            $candidates = Candidate::join('candidate_elections', 'candidates.candidate_id', '=', 'candidate_elections.candidate_id')
-            ->where('candidate_elections.election_id', '=', $election_id)
-            ->get();
+            $candidates = Candidate::all();
         
 
             // Return the list of voters as JSON response

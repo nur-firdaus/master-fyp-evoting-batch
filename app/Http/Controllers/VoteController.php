@@ -30,11 +30,12 @@ class VoteController extends Controller
 
         
         // Execute the query
-        $results = DB::table('votes')
-            ->select(DB::raw('candidate_id, count(voter_id) as vote_count'))
-            ->where('election_id', $election_id)
-            ->groupBy('candidate_id')
-            ->get();
+        $results = DB::table('votes as v')
+        ->join('candidates as a', 'a.candidate_id', '=', 'v.candidate_id')
+        ->select('a.full_name', DB::raw('count(v.voter_id) as vote_count'))
+        ->where('v.election_id', $election_id)
+        ->groupBy('a.full_name')
+        ->get();
 
         return response()->json($results);
     }
